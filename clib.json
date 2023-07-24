@@ -1,0 +1,13 @@
+{
+    "name": "heaps",
+    "version": "0.0.0",
+    "repo": "goodcleanfun/heaps",
+    "description": "Generic heap data structures in C",
+    "keywords": [],
+    "license": "MIT",
+    "dependencies": {
+      "goodcleanfun/num_arrays": "*"
+    },
+    "src": [
+    ]
+  }
