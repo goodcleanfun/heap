@@ -9,5 +9,10 @@
       "goodcleanfun/num_arrays": "*"
     },
     "src": [
+      "src/heap.h",
+      "src/double_maxheap.h",
+      "src/double_minheap.h",
+      "src/float_maxheap.h",
+      "src/float_minheap.h"
     ]
   }
