@@ -13,6 +13,8 @@
       "src/double_maxheap.h",
       "src/double_minheap.h",
       "src/float_maxheap.h",
-      "src/float_minheap.h"
+      "src/float_minheap.h",
+      "src/uint32_maxheap.h",
+      "src/uint32_minheap.h"
     ]
   }
