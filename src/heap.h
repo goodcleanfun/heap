@@ -30,64 +30,6 @@ static inline size_t keep_top_bit(size_t n) {
 }
 
 #define HEAP_INIT(name, type, array_type, precedes)                             \
-static inline void name##_push(array_type *array, type x) {                     \
-    array_type##_push(array, x);                                                \
-    size_t i = array->n - 1;                                                    \
-    type *a = array->a;                                                         \
-    while (i > 0) {                                                             \
-        size_t p = heap_parent(i);                                              \
-        if (precedes(a[p], a[i])) {                                             \
-            type tmp = a[i];                                                    \
-            a[i] = a[p];                                                        \
-            a[p] = tmp;                                                         \
-            i = p;                                                              \
-        } else {                                                                \
-            break;                                                              \
-        }                                                                       \
-    }                                                                           \
-}                                                                               \
-                                                                                \
-static inline bool name##_pop(array_type *array, type *result) {                \
-    if (array->n == 0) {                                                        \
-        return false;                                                           \
-    }                                                                           \
-    type *a = array->a;                                                         \
-    type root = a[0];                                                           \
-    type last;                                                                  \
-    if (!array_type##_pop(array, &last)) {                                      \
-        return false;                                                           \
-    }                                                                           \
-    if (array->n == 0) {                                                        \
-        *result = root;                                                         \
-        return true;                                                            \
-    }                                                                           \
-    a[0] = last;                                                                \
-    size_t i = 0;                                                               \
-                                                                                \
-    while (true) {                                                              \
-        size_t left = heap_left(i);                                             \
-        size_t right = heap_right(i);                                           \
-        size_t priority = i;                                                    \
-        if (left < array->n && precedes(a[left], a[priority])) {                \
-            priority = left;                                                    \
-        } else if (right < array->n && precedes(a[right], a[priority])) {       \
-            priority = right;                                                   \
-        }                                                                       \
-                                                                                \
-        if (priority != i) {                                                    \
-            type tmp = a[i];                                                    \
-            a[i] = a[priority];                                                 \
-            a[priority] = tmp;                                                  \
-            i = priority;                                                       \
-        } else {                                                                \
-            break;                                                              \
-        }                                                                       \
-    }                                                                           \
-                                                                                \
-    *result = root;                                                             \
-    return true;                                                                \
-}                                                                               \
-                                                                                \
 static inline bool name##_siftdown(array_type *array, size_t start, size_t end) { \
     if (start > array->n || end > array->n) return false;                       \
     size_t root = start;                                                        \
@@ -135,6 +77,45 @@ static inline bool name##_siftup(array_type *array, size_t i) {                 
         i = child_i;                                                            \
     }                                                                           \
     name##_siftdown(array, start, i);                                           \
+    return true;                                                                \
+}                                                                               \
+                                                                                \
+static inline void name##_push(array_type *array, type x) {                     \
+    array_type##_push(array, x);                                                \
+    size_t i = array->n - 1;                                                    \
+    type *a = array->a;                                                         \
+    while (i > 0) {                                                             \
+        size_t p = heap_parent(i);                                              \
+        if (precedes(a[p], a[i])) {                                             \
+            type tmp = a[i];                                                    \
+            a[i] = a[p];                                                        \
+            a[p] = tmp;                                                         \
+            i = p;                                                              \
+        } else {                                                                \
+            break;                                                              \
+        }                                                                       \
+    }                                                                           \
+}                                                                               \
+                                                                                \
+static inline bool name##_pop(array_type *array, type *result) {                \
+    if (array->n == 0) {                                                        \
+        return false;                                                           \
+    }                                                                           \
+    type *a = array->a;                                                         \
+    type root = a[0];                                                           \
+    type last;                                                                  \
+    if (!array_type##_pop(array, &last)) {                                      \
+        return false;                                                           \
+    }                                                                           \
+    if (array->n == 0) {                                                        \
+        *result = root;                                                         \
+        return true;                                                            \
+    }                                                                           \
+    a[0] = last;                                                                \
+    if (!name##_siftup(array, 0)) {                                             \
+        return false;                                                           \
+    }                                                                           \
+    *result = root;                                                             \
     return true;                                                                \
 }                                                                               \
                                                                                 \
