@@ -30,27 +30,19 @@ static inline size_t keep_top_bit(size_t n) {
 }
 
 #define HEAP_INIT(name, type, array_type, precedes)                             \
-static inline bool name##_siftdown(array_type *array, size_t start, size_t end) { \
-    if (start > array->n || end > array->n) return false;                       \
-    size_t root = start;                                                        \
+static inline bool name##_siftdown(array_type *array, size_t start_pos, size_t pos) { \
+    if (start_pos > array->n || pos > array->n) return false;                       \
     type *a = array->a;                                                         \
-    while (heap_left(root) <= end) {                                            \
-        size_t child = heap_left(root);                                         \
-        size_t swap = root;                                                     \
-        if (precedes(a[child], a[swap])) {                                      \
-            swap = child;                                                       \
-        }                                                                       \
-        if (child + 1 <= end && precedes(a[child + 1], a[swap])) {              \
-            swap = child + 1;                                                   \
-        }                                                                       \
-        if (swap == root) {                                                     \
+    type new_item = a[pos];                                                     \
+    while (pos > start_pos) {                                                   \
+        size_t parent_pos = heap_parent(pos);                                   \
+        type parent = a[parent_pos];                                            \
+        if (!precedes(new_item, parent)) {                                      \
             break;                                                              \
-        } else {                                                                \
-            type tmp = a[root];                                                 \
-            a[root] = a[swap];                                                  \
-            a[swap] = tmp;                                                      \
-            root = swap;                                                        \
         }                                                                       \
+        a[pos] = parent;                                                        \
+        a[parent_pos] = new_item;                                               \
+        pos = parent_pos;                                                       \
     }                                                                           \
     return true;                                                                \
 }                                                                               \
@@ -80,21 +72,9 @@ static inline bool name##_siftup(array_type *array, size_t i) {                 
     return true;                                                                \
 }                                                                               \
                                                                                 \
-static inline void name##_push(array_type *array, type x) {                     \
+static inline bool name##_push(array_type *array, type x) {                     \
     array_type##_push(array, x);                                                \
-    size_t i = array->n - 1;                                                    \
-    type *a = array->a;                                                         \
-    while (i > 0) {                                                             \
-        size_t p = heap_parent(i);                                              \
-        if (precedes(a[p], a[i])) {                                             \
-            type tmp = a[i];                                                    \
-            a[i] = a[p];                                                        \
-            a[p] = tmp;                                                         \
-            i = p;                                                              \
-        } else {                                                                \
-            break;                                                              \
-        }                                                                       \
-    }                                                                           \
+    return name##_siftdown(array, 0, array->n - 1);                             \
 }                                                                               \
                                                                                 \
 static inline bool name##_pop(array_type *array, type *result) {                \
