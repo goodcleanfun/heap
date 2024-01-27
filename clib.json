@@ -8,6 +8,9 @@
     "dependencies": {
       "goodcleanfun/num_arrays": "*"
     },
+    "development": {
+        "silentbicycle/greatest": "*"
+    },
     "src": [
       "src/heap.h",
       "src/double_maxheap.h",
