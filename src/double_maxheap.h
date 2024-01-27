@@ -1,9 +1,16 @@
 #ifndef DOUBLE_MAXHEAP_H
 #define DOUBLE_MAXHEAP_H
 
-#include "heap.h"
-#include "num_arrays/double_array.h"
+#include "num_arrays/float_array.h"
 
-MAXHEAP_INIT(double_maxheap, double, double_array)
+#define HEAP_NAME double_maxheap
+#define ARRAY_TYPE double
+#define ARRAY_NAME double_array
+#define MAXHEAP
+#include "heap.h"
+#undef HEAP_NAME
+#undef ARRAY_TYPE
+#undef ARRAY_NAME
+#undef MAXHEAP
 
 #endif
