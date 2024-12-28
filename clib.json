@@ -6,7 +6,7 @@
     "keywords": [],
     "license": "MIT",
     "dependencies": {
-      "goodcleanfun/num_arrays": "*"
+      "goodcleanfun/num_array": "*"
     },
     "development": {
         "silentbicycle/greatest": "*"
