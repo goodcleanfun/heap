@@ -1,7 +1,7 @@
 {
     "name": "heap",
     "version": "0.4.1",
-    "repo": "goodcleanfun/heaps",
+    "repo": "goodcleanfun/heap",
     "description": "Generic heap data structures in C",
     "keywords": [],
     "license": "MIT",
