@@ -1,6 +1,6 @@
 {
     "name": "heap",
-    "version": "0.4.1",
+    "version": "0.4.2",
     "repo": "goodcleanfun/heap",
     "description": "Generic heap data structures in C",
     "keywords": [],
