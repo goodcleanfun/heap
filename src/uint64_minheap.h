@@ -1,7 +1,7 @@
 #ifndef UINT64_MINHEAP_H
 #define UINT64_MINHEAP_H
 
-#include "num_arrays/uint64_array.h"
+#include "num_array/uint64_array.h"
 
 #define HEAP_NAME uint64_minheap
 #define ARRAY_TYPE uint64_t

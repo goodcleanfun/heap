@@ -1,7 +1,7 @@
 #ifndef UINT64_MAXHEAP_H
 #define UINT64_MAXHEAP_H
 
-#include "num_arrays/uint64_array.h"
+#include "num_array/uint64_array.h"
 
 #define HEAP_NAME uint64_maxheap
 #define ARRAY_TYPE uint64_t

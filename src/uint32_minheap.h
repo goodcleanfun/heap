@@ -1,7 +1,7 @@
 #ifndef UINT32_MINHEAP_H
 #define UINT32_MINHEAP_H
 
-#include "num_arrays/uint32_array.h"
+#include "num_array/uint32_array.h"
 
 #define HEAP_NAME uint32_minheap
 #define ARRAY_TYPE uint32_t

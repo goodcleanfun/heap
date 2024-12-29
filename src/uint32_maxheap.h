@@ -1,7 +1,7 @@
 #ifndef UINT32_MAXHEAP_H
 #define UINT32_MAXHEAP_H
 
-#include "num_arrays/uint32_array.h"
+#include "num_array/uint32_array.h"
 
 #define HEAP_NAME uint32_maxheap
 #define ARRAY_TYPE uint32_t

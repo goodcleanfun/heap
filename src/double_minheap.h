@@ -1,7 +1,7 @@
 #ifndef DOUBLE_MINHEAP_H
 #define DOUBLE_MINHEAP_H
 
-#include "num_arrays/double_array.h"
+#include "num_array/double_array.h"
 
 #define HEAP_NAME double_minheap
 #define ARRAY_TYPE double

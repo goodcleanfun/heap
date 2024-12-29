@@ -1,7 +1,7 @@
 #ifndef FLOAT_MAXHEAP_H
 #define FLOAT_MAXHEAP_H
 
-#include "num_arrays/float_array.h"
+#include "num_array/float_array.h"
 
 #define HEAP_NAME float_maxheap
 #define ARRAY_TYPE float
